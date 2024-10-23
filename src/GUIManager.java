@@ -3,7 +3,6 @@ import java.awt.*;
 
 public class GUIManager {
     private JFrame frame;
-    private DrawingPanel drawingPanel;
     private JButton startButton;
     private JButton stopButton;
     private JButton settingsButton;
@@ -14,7 +13,7 @@ public class GUIManager {
 
         // Create GUI components
         frame = new JFrame("EVE Online Bot");
-        frame.setSize(600, 400);
+        frame.setSize(600, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         startButton = new JButton("Start");
@@ -28,15 +27,11 @@ public class GUIManager {
         // TODO: Add action listener for settings button
         settingsButton.addActionListener(e -> System.out.println("Settings button clicked"));
 
-        // Create drawing panel
-        drawingPanel = new DrawingPanel();
-
-
         // Add components to frame
         frame.setLayout(new BorderLayout());
-        frame.add(drawingPanel, BorderLayout.CENTER);
         frame.add(startButton, BorderLayout.SOUTH);
         frame.add(stopButton, BorderLayout.NORTH);
+        frame.add(settingsButton, BorderLayout.EAST);
     }
 
     public void show() {
@@ -53,5 +48,10 @@ public class GUIManager {
         botController.stopBot();
         startButton.setEnabled(true);
         stopButton.setEnabled(false);
+    }
+
+    private void openSettings() {
+        // Show settings window
+        // settingsWindow.show();
     }
 }

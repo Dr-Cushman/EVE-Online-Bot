@@ -1,28 +1,31 @@
+import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
+
 public class BotController {
-    private boolean running;
     private ScreenshotManager screenshotManager;
 
-
     public BotController() {
-        running = false;
         screenshotManager = new ScreenshotManager();
     }
 
+    // Start the bot logic
     public void startBot() {
-        running = true;
-        System.out.println("Bot started");
-        // Start screenshot processing
-        screenshotManager.startScreenshotProcess();
+        System.out.println("Bot started...");
+        // Other logic to start bot
     }
 
+    // Stop the bot logic
     public void stopBot() {
-        running = false;
-        System.out.println("Bot stopped");
-        // Stop screenshot processing
-        screenshotManager.stopScreenshotProcess();
+        System.out.println("Bot stopped.");
+        // Other logic to stop bot
     }
 
-    public boolean isRunning() {
-        return running;
+    // Method to take a screenshot of the selected region
+    public void takeScreenshot(Rectangle region) {
+        BufferedImage screenshot = screenshotManager.takeScreenshot(region);
+        if (screenshot != null) {
+            System.out.println("Screenshot taken of region: " + region);
+            // TODO: Add analysis logic for detecting enemies (e.g., red color)
+        }
     }
 }
