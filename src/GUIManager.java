@@ -7,6 +7,7 @@ public class GUIManager {
     private JButton stopButton;
     private JButton settingsButton;
     private BotController botController;
+    private SettingsWindow settingsWindow;
 
     public GUIManager(BotController botController) {
         this.botController = botController;
@@ -25,13 +26,16 @@ public class GUIManager {
         stopButton.addActionListener(e -> stopBot());
 
         // TODO: Add action listener for settings button
-        settingsButton.addActionListener(e -> System.out.println("Settings button clicked"));
+        settingsButton.addActionListener(e -> openSettings());
 
         // Add components to frame
         frame.setLayout(new BorderLayout());
         frame.add(startButton, BorderLayout.SOUTH);
         frame.add(stopButton, BorderLayout.NORTH);
-        frame.add(settingsButton, BorderLayout.EAST);
+        frame.add(settingsButton, BorderLayout.CENTER);
+
+        // Initialize settings window
+        settingsWindow = new SettingsWindow(botController);
     }
 
     public void show() {
@@ -52,6 +56,6 @@ public class GUIManager {
 
     private void openSettings() {
         // Show settings window
-        // settingsWindow.show();
+        settingsWindow.show();
     }
 }

@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.KeyEvent;
 
 public class RegionSelector extends JFrame {
     private Point startPoint;
@@ -9,6 +10,7 @@ public class RegionSelector extends JFrame {
     private BotController botController;
 
     public RegionSelector(BotController botController) {
+        System.out.println("Region Selector Window Created");
         this.botController = botController;
 
         // Set frame to fullscreen and transparent
@@ -74,4 +76,13 @@ public class RegionSelector extends JFrame {
         // This method can be called to initialize the region selection
         setVisible(true);
     }
+
+    // ESC key to close the region selector window
+    @Override
+    protected void processKeyEvent(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            dispose(); // Close the region selector
+        }
+    }
+
 }
