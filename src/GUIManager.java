@@ -14,18 +14,17 @@ public class GUIManager {
 
         // Create GUI components
         frame = new JFrame("EVE Online Bot");
-        frame.setSize(600, 200);
+        frame.setSize(170, 150);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         startButton = new JButton("Start");
         stopButton = new JButton("Stop");
         settingsButton = new JButton("Settings");
-        stopButton.setEnabled(false); // Disable stop button if bot is not running
+        startButton.setEnabled(false); // Disable start button by default, user must configure settings first
+        stopButton.setEnabled(false); // Disable stop button by default
 
         startButton.addActionListener(e -> startBot());
         stopButton.addActionListener(e -> stopBot());
-
-        // TODO: Add action listener for settings button
         settingsButton.addActionListener(e -> openSettings());
 
         // Add components to frame
@@ -33,9 +32,6 @@ public class GUIManager {
         frame.add(startButton, BorderLayout.SOUTH);
         frame.add(stopButton, BorderLayout.NORTH);
         frame.add(settingsButton, BorderLayout.CENTER);
-
-        // Initialize settings window
-        settingsWindow = new SettingsWindow(botController);
     }
 
     public void show() {
@@ -55,6 +51,10 @@ public class GUIManager {
     }
 
     private void openSettings() {
+        // Create and show settings window if not already created
+        if (settingsWindow == null) {
+            settingsWindow = new SettingsWindow(botController);
+        }
         // Show settings window
         settingsWindow.show();
     }

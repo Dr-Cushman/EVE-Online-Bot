@@ -11,7 +11,7 @@ public class SettingsWindow {
 
         // Create settings frame
         settingsFrame = new JFrame("Settings");
-        settingsFrame.setSize(400, 200);
+        settingsFrame.setSize(200, 200);
         settingsFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Create select region button

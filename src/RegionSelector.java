@@ -25,6 +25,8 @@ public class RegionSelector extends JFrame {
             @Override
             public void mousePressed(MouseEvent e) {
                 startPoint = e.getPoint();
+                endPoint = startPoint; // Initialize endPoint to startPoint
+                repaint(); // Repaint to show the initial point
             }
 
             @Override
@@ -33,8 +35,8 @@ public class RegionSelector extends JFrame {
                 // Rectangle drawn; handle screenshot here
                 Rectangle selectedRegion = getSelectedRectangle();
                 System.out.println("Selected region: " + selectedRegion);
-                botController.takeScreenshot(selectedRegion);
-                dispose(); // Close the region selector
+                // botController.takeScreenshot(selectedRegion);
+                // dispose(); // Close the region selector
             }
         });
 
@@ -42,7 +44,7 @@ public class RegionSelector extends JFrame {
             @Override
             public void mouseDragged(MouseEvent e) {
                 endPoint = e.getPoint();
-                repaint(); // Redraw the rectangle as the user drags
+                repaint(); // Repaint the window to show the rectangle
             }
         });
 
@@ -65,7 +67,7 @@ public class RegionSelector extends JFrame {
         if (startPoint != null && endPoint != null) {
             Graphics2D g2d = (Graphics2D) g;
             g2d.setColor(Color.RED);
-            g2d.setStroke(new BasicStroke(2)); // Thickness of the rectangle's border
+            g2d.setStroke(new BasicStroke(5)); // Thickness of the rectangle's border
             Rectangle rect = getSelectedRectangle();
             g2d.drawRect(rect.x, rect.y, rect.width, rect.height);
         }
@@ -84,5 +86,4 @@ public class RegionSelector extends JFrame {
             dispose(); // Close the region selector
         }
     }
-
 }
