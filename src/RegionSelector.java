@@ -44,7 +44,7 @@ public class RegionSelector extends JFrame {
             @Override
             public void mouseDragged(MouseEvent e) {
                 endPoint = e.getPoint();
-                repaint(); // Repaint the window to show the rectangle
+                paint(getGraphics()); // Repaint to show the rectangle as the user drags
             }
         });
 

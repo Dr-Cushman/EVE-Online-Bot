@@ -5,6 +5,7 @@ public class SettingsWindow {
     private JFrame settingsFrame;
     private JButton selectRegionButton;
     private BotController botController;
+    private JLabel regionLabel;
 
     public SettingsWindow(BotController botController) {
         this.botController = botController;
@@ -18,9 +19,13 @@ public class SettingsWindow {
         selectRegionButton = new JButton("Select Observation Region");
         selectRegionButton.addActionListener(e -> selectRegion());
 
+        regionLabel = new JLabel("Please select an observation region \nPress ESC Key when done.");
+
         // Layout components
         settingsFrame.setLayout(new BorderLayout());
         settingsFrame.add(selectRegionButton, BorderLayout.NORTH);
+        settingsFrame.add(regionLabel, BorderLayout.CENTER);
+
 
         // Show settings frame
         settingsFrame.setVisible(true);
