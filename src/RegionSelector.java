@@ -1,91 +1,49 @@
+/*
+    * RegionSelector.java
+    * This class lets you draw a red rectangle when the user clicks and drags the mouse to select a region on the screen.
+    * This new region can be used to take a screenshot of that specific region.
+    *
+ */
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 
 public class RegionSelector extends JFrame {
-    private Point startPoint;
-    private Point endPoint;
+
     private BotController botController;
-    private ScreenshotManager screenshotManager;
+    private Rectangle region;
+    private JLabel regionLabel;
+    private Point start;
+    private Point end;
 
     public RegionSelector(BotController botController) {
-        System.out.println("Region Selector Window Created");
         this.botController = botController;
+        region = new Rectangle();
+        regionLabel = new JLabel("Select a region by clicking and dragging the mouse");
+        start = new Point();
+        end = new Point();
 
-        // Set frame to fullscreen and transparent
-        setUndecorated(true);
-        setOpacity(0.5f); // Semi-transparent window
-        setExtendedState(JFrame.MAXIMIZED_BOTH);
-        setBackground(new Color(0, 0, 0, 0)); // Transparent background
-        setAlwaysOnTop(true);
+        // Set up the frame
+        setTitle("Select Region");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Set the frame to full screen
+        setAlwaysOnTop(true);
+        setOpacity(0.5f); // Set the frame to be semi-transparent
 
-        // Add mouse listener for dragging and selecting the region
-        addMouseListener(new MouseAdapter() {
-            @Override
-            public void mousePressed(MouseEvent e) {
-                startPoint = e.getPoint();
-                endPoint = startPoint; // Initialize endPoint to startPoint
-                repaint(); // Repaint to show the initial point
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                endPoint = e.getPoint();
-                // Rectangle drawn; handle screenshot here
-                Rectangle selectedRegion = getSelectedRectangle();
-                System.out.println("Selected region: " + selectedRegion);
-                // botController.takeScreenshot(selectedRegion);
-                // dispose(); // Close the region selector
-            }
-        });
-
-        addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseDragged(MouseEvent e) {
-                endPoint = e.getPoint();
-                paint(getGraphics()); // Repaint to show the rectangle as the user drags
-            }
-        });
-
-        setVisible(true);
     }
 
-    // Get the rectangle selected by the user
-    private Rectangle getSelectedRectangle() {
-        int x = Math.min(startPoint.x, endPoint.x);
-        int y = Math.min(startPoint.y, endPoint.y);
-        int width = Math.abs(startPoint.x - endPoint.x);
-        int height = Math.abs(startPoint.y - endPoint.y);
-        return new Rectangle(x, y, width, height);
+    public Rectangle getSelectedRegion() {
+        return region;
     }
 
-    // Paint the rectangle as the user drags the mouse
-    @Override
-    public void paint(Graphics g) {
-        super.paint(g);
-        if (startPoint != null && endPoint != null) {
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(Color.RED);
-            g2d.setStroke(new BasicStroke(5)); // Thickness of the rectangle's border
-            Rectangle rect = getSelectedRectangle();
-            g2d.drawRect(rect.x, rect.y, rect.width, rect.height);
-        }
-    }
-
-    // Start the region selector (optional method, just for organization)
     public void start() {
-        // This method can be called to initialize the region selection
-        setVisible(true);
+        setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR)); // Set the cursor to crosshair
+
     }
 
-    // ESC key to close the region selector window
-    @Override
-    protected void processKeyEvent(KeyEvent e) {
-        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
-            dispose(); // Close the region selector
-        }
-    }
 }

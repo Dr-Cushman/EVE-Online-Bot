@@ -12,7 +12,18 @@ public class ScreenshotManager {
         System.out.println("Stopping screenshot process");
     }
 
-    public BufferedImage takeScreenshot(Rectangle region) {
+    public BufferedImage takeScreenshot() {
+        try {
+            Robot robot = new Robot();
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+            return robot.createScreenCapture(new Rectangle(screenSize));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public BufferedImage takeRegionalScreenshot(Rectangle region) {
         try {
             Robot robot = new Robot();
             return robot.createScreenCapture(region);

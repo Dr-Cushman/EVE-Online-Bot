@@ -22,7 +22,7 @@ public class BotController {
 
     // Method to take a screenshot of the selected region
     public void takeScreenshot(Rectangle region) {
-        BufferedImage screenshot = screenshotManager.takeScreenshot(region);
+        BufferedImage screenshot = screenshotManager.takeRegionalScreenshot(region);
         if (screenshot != null) {
             System.out.println("Screenshot taken of region: " + region);
             // TODO: Add analysis logic for detecting enemies (e.g., red color)
