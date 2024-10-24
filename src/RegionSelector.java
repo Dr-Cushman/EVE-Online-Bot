@@ -8,6 +8,7 @@ public class RegionSelector extends JFrame {
     private Point startPoint;
     private Point endPoint;
     private BotController botController;
+    private ScreenshotManager screenshotManager;
 
     public RegionSelector(BotController botController) {
         System.out.println("Region Selector Window Created");
@@ -18,6 +19,7 @@ public class RegionSelector extends JFrame {
         setOpacity(0.5f); // Semi-transparent window
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setBackground(new Color(0, 0, 0, 0)); // Transparent background
+        setAlwaysOnTop(true);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         // Add mouse listener for dragging and selecting the region

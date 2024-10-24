@@ -14,7 +14,7 @@ public class GUIManager {
 
         // Create GUI components
         frame = new JFrame("EVE Online Bot");
-        frame.setSize(170, 150);
+        frame.setSize(200, 150);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         startButton = new JButton("Start");
